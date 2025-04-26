@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assinatura de Notícias</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .preco {
+            font-size: 3rem;
+            color: #7c3aed;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        .centavos {
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .periodo {
+            color: #6b7280;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .beneficios {
+            text-align: left;
+            margin: 2rem 0;
+        }
+
+        .beneficio-item {
+            display: flex;
+            align-items: center;
+            margin: 1rem 0;
+            color: #374151;
+        }
+
+        .beneficio-item i {
+            color: #7c3aed;
+            margin-right: 10px;
+        }
+
+        .header-icon {
+            font-size: 3rem;
+            color: #7c3aed;
+            margin-bottom: 1rem;
+        }
+
+        .titulo {
+            color: #1f2937;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <i class="fas fa-newspaper header-icon"></i>
+        <h1 class="titulo">Testando Pagamento Portal de Notícias Premium</h1>
+        
+        <div class="preco">
+            R$ 0<span class="centavos">,50</span>
+        </div>
+        <div class="periodo">Oferta de lançamento</div>
+
+        <div class="beneficios">
+            <div class="beneficio-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Acesso ilimitado a todas as notícias</span>
+            </div>
+            <div class="beneficio-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Conteúdo exclusivo</span>
+            </div>
+            <div class="beneficio-item">
+                <i class="fas fa-check-circle"></i>
+                <span>Sem anúncios</span>
+            </div>
+            <div class="beneficio-item">
+                <i class="fas fa-check-circle"></i>
+                <span>bla bla bla</span>
+            </div>
+            <div class="beneficio-item">
+                <i class="fas fa-check-circle"></i>
+                <span>bla bla bla bla</span>
+            </div>
+            <div class="beneficio-item">
+                <i class="fas fa-check-circle"></i>
+                <span>bla bla bla</span>
+            </div>
+        </div>
+
+        <button id="botao">Assinar por R$ 0,50</button>
+    </div>
+
+    <script>
+        document.getElementById("botao").addEventListener("click", async () => {
+            const response = await fetch("/create-checkout-session", {
+    method: "POST"
+        });
+            const data = await response.json();
+            window.location.href = data.url;
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Pagamento aprovado</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .container {
+      text-align: center;
+      margin-top: 100px;
+    }
+    h1 {
+      color: #16a34a;
+      margin-bottom: 1rem;
+    }
+    p {
+      color: #4b5563;
+      margin-bottom: 2rem;
+    }
+    #botao-voltar {
+      padding: 15px 30px;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      background-color: #10b981;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+    }
+    #botao-voltar:hover {
+      background-color: #059669;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 8px rgba(16, 185, 129, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>✅ Pagamento realizado com sucesso!</h1>
+
+      <h2>Resumo do pagamento:</h2>
+  <p>Email: <strong id="email">carregando...</strong></p>
+  <p>Valor pago: R$ <strong id="valor">carregando...</strong></p>
+
+    <p>Obrigado por apoiar nosso site de notícias 📰</p>
+    <button id="botao-voltar" onclick="window.location.href='/'">Voltar para o início</button>
+  </div>
+
+
+  <script>
+    async function carregarDadosPagamento() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const sessionId = urlParams.get("session_id");
+  
+      if (!sessionId) return;
+  
+      const response = await fetch(`/checkout-session?session_id=${sessionId}`);
+      const session = await response.json();
+  
+      document.getElementById("email").textContent = session.customer_details.email;
+      document.getElementById("valor").textContent = (session.amount_total / 100).toFixed(2);
+    }
+  
+    carregarDadosPagamento();
+  </script>
+  
+</body>
+</html>
